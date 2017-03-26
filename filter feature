@@ -1,0 +1,29 @@
+Feature: Clothes online store
+As a user, I want to reach the website on any brouser
+
+Scenario1: Visit home page {http://automationpractice.com/index.php}
+When i visit "http://automationpractice.com/index.php"
+Then i see that the tittle contains "automationpractice.com"
+
+Feature: filter
+  As a user, I want to filter so that i can to limit what products a shown
+
+Background: Navigate to filter
+Given I navigate to home page
+And i select category "women"
+
+Scenario1: user is able to filter products only by max price
+  When i slide "the lowest price" bar to the max value
+  Then  i should see results filtered by max price
+
+Scenario2: user is able to slide back from highest price
+When i slide "the lowest price" bar to the max value
+  Then  i should be able to slide back "lowest price" bar
+
+Scenario3: user is able to filter dresses by size
+Given i open website at {http://automationpractice.com/index.php}
+When i select the category "Dresses"
+And i click on tab "summer dresses"
+And I check "L" size-checkbox
+And i select random dress
+Then Dress "Size" results should contains "L"
