@@ -1,29 +1,55 @@
-Feature: Clothes online store
+Feature: Online Web Store application
 As a user, I want to reach the website on any brouser
 
-Scenario1: Visit home page {http://automationpractice.com/index.php}
-When i visit "http://automationpractice.com/index.php"
-Then i see that the tittle contains "automationpractice.com"
+Scenario1: Visit home page {http://demo.nopcommerce.com/}
+When i visit "http://demo.nopcommerce.com/register"
+Then i see that the tittle contains "demo.nopcommerce.com"
 
 Feature: filter
   As a user, I want to filter so that i can to limit what products a shown
 
 Background: Navigate to filter
 Given I navigate to home page
-And i select category "women"
+And i select category "Computers"
+And I select subcategory "Notebooks"
 
-Scenario1: user is able to filter products only by max price
-  When i slide "the lowest price" bar to the max value
-  Then  i should see results filtered by max price
+Scenario1: user is able to filter products by price
+  When i select "Sort by" 
+  And I chooce "Price/low to high"
+  Then  i should see results filtered by low price first
+  
 
-Scenario2: user is able to slide back from highest price
-When i slide "the lowest price" bar to the max value
-  Then  i should be able to slide back "lowest price" bar
+Scenario2: user is able to filter product by price and by manufacturer 
+When i select "Sort by" 
+  And I chooce "Price/high to low"
+  Then  i should see results filtered by high price first
+  And i choose some of the Manufacturer i should be able to see the manufacturer product sort by high price 
 
-Scenario3: user is able to filter dresses by size
-Given i open website at {http://automationpractice.com/index.php}
-When i select the category "Dresses"
-And i click on tab "summer dresses"
-And I check "L" size-checkbox
-And i select random dress
-Then Dress "Size" results should contains "L"
+Feature: Cancel
+  As a user, I want to can cancel my order in every step 
+
+Background: Cancel by clicking on “Back” button.
+Given I navigate to home page
+And  i Select button "Log in" 
+And Choose button "Shopping cart"
+And I Add some products to "Shopping cart"
+And I Ckeck the button " I agree with the terms of service and I adhere to them unconditionally"
+And I press button "checkout"
+And I Start to fill information in the mandatory fields
+
+Scenario3: The user should be able to cancel his order at any section by clicking on “Back” button.
+When I press button "Back" 
+Then I could cancel the order by clicking on “Back” button.
+
+
+Feature: Cancel
+  As a user, I want to share products info with friends  
+  
+Background: Navigate to social media shearing 
+Given I navigate to home page
+
+Scenario3: The user should be able to send email to the friends 
+When I go to some subcategories 
+And choose some product
+Then I could send email to friends 
+
